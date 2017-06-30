@@ -6,7 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Executors类，提供了一系列工厂方法用于创先线程池，返回的线程池都实现了ExecutorService接口。
+ * Executors类，提供了一系列工厂方法用于创建线程池，返回的线程池都实现了ExecutorService接口。
  * Created by DONGSHILEI on 2017/6/30.
  */
 public class ExecutorsTest {
