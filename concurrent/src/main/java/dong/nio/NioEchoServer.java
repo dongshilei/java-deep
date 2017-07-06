@@ -174,7 +174,7 @@ public class NioEchoServer {
         public void run() {
             EchoClient echoClient = (EchoClient) sk.attachment();
             echoClient.enqueue(bb);
-            sk.interestOps(SelectionKey.OP_WRITE);
+            sk.interestOps(SelectionKey.OP_WRITE|SelectionKey.OP_READ);
             //唤醒selector
             selector.wakeup();
         }
