@@ -36,14 +36,14 @@ public class ExecutorsTest {
      */
     public static void testScheduledPool(){
         ScheduledExecutorService threadPool = Executors.newScheduledThreadPool(1);
-        //5秒后执行任务
+        //5秒后执行任务 --延时执行
         threadPool.schedule(new Runnable() {
             @Override
             public void run() {
                 System.out.println("爆炸");
             }
         },5, TimeUnit.SECONDS);
-        // 5秒后执行，以后每2秒执行一次
+        // 5秒后执行，以后每2秒执行一次  --周期性执行
         threadPool.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
