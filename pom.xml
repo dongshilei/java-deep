@@ -12,6 +12,8 @@
         <module>concurrent</module>
         <module>reflection</module>
         <module>google-guava</module>
+        <module>javautils</module>
+        <module>annotation</module>
     </modules>
     <name>java-deep</name>
     <url>http://maven.apache.org</url>

@@ -1,3 +1,5 @@
+package dong;
+
 /**
  * Created by DONGSHILEI on 2017/6/23.
  */
@@ -24,6 +26,10 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void print(User user){
+        System.out.println(user.getAge()+"----"+user.getName());
     }
 
 }
