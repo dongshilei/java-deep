@@ -1,5 +1,9 @@
 package dong.java8;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
@@ -27,8 +31,28 @@ public class StreamTest {
         LongStream.range(1,10).forEach(i-> System.out.println(i));
     }
 
+    //lambda遍历list
+    public static void arry(){
+        List<String> list = Arrays.asList("aaa", "bbb", "ccc", "ddd");
+        list.forEach(str->{
+            System.out.println(str);
+        });
+    }
+    //lambda遍历map
+    public static void map(){
+        Map<String,Integer> mp = new HashMap<>();
+        mp.put("aaa",1);
+        mp.put("bbb",2);
+        mp.put("ccc",3);
+        mp.forEach((k,v)->{
+            System.out.println(mp.get(k));
+        });
+    }
+
     public static void main(String[] args) {
-        intStreamTest();
-        longStreamTest();
+        //intStreamTest();
+        //longStreamTest();
+        arry();
+        map();
     }
 }
