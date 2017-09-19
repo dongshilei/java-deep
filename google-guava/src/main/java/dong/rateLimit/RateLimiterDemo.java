@@ -28,6 +28,24 @@ public class RateLimiterDemo {
         }
         threadPool.shutdown();
     }
+    public static void test1(){
+        RateLimiter rateLimiter = RateLimiter.create(50);
+        ExecutorService pool = Executors.newFixedThreadPool(5);
+        while (true){
+            rateLimiter.acquire();
+            pool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName()+":  "+System.currentTimeMillis());
+                }
+            });
+        }
+    }
 
     public static void test2(){
         //每秒不会超过2个任务
@@ -39,6 +57,6 @@ public class RateLimiterDemo {
     }
 
     public static void main(String[] args) {
-        test2();
+        test1();
     }
 }
