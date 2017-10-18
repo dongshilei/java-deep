@@ -174,9 +174,48 @@ public class JodaTimeTest {
         long millis = dt.getMillis();
 
     }
+
+    /**
+     * 获取传入时间的日期的最后一毫秒
+     * @param time
+     * @return
+     */
+    public static long getDayLastCurrentTimeMillis(long time){
+        DateTime dateTime = new DateTime(time);
+        int year = dateTime.getYear();
+        int month = dateTime.getMonthOfYear();
+        int day = dateTime.getDayOfMonth();
+        DateTime dt = new DateTime(year, month, day, 23, 59, 59, 999);
+        return dt.getMillis();
+    }
+
+    /**
+     * 获取传入时间的日期的第一毫秒
+     * @param time
+     * @return
+     */
+    public static long getDayFirstCurrentTimeMillis(long time){
+        DateTime dateTime = new DateTime(time);
+        int year = dateTime.getYear();
+        int month = dateTime.getMonthOfYear();
+        int day = dateTime.getDayOfMonth();
+        DateTime dt = new DateTime(year, month, day, 0, 0, 0);
+        return dt.getMillis();
+    }
     public static void main(String[] args) {
         //useCaseOne();
         //useCaseWith();
+        DateTime begin = new DateTime(1504172432622L);
+        DateTime end = begin.plusDays(31);
+        int months = Months.monthsBetween(begin, end).getMonths();
+        System.out.println(months);
+        DateTime end2 = begin.plusMonths(months);
+        long endMillis = end.getMillis();
+        long end2Millis = end2.getMillis();
+        if(endMillis-end2Millis>0){
+            months+=1;
+        }
+        System.out.println(months);
 
     }
 }

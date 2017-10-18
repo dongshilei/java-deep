@@ -14,6 +14,7 @@
         <module>google-guava</module>
         <module>javautils</module>
         <module>annotation</module>
+        <module>design-pattern</module>
     </modules>
     <name>java-deep</name>
     <url>http://maven.apache.org</url>

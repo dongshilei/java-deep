@@ -1,11 +1,15 @@
 package dong.java8;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.function.BinaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
+
+import static com.xiaoleilu.hutool.util.ArrayUtil.range;
+import static java.io.FileDescriptor.out;
+import static jdk.nashorn.internal.objects.Global.println;
 
 /**
  * Created by DONGSHILEI on 2017/9/19
@@ -49,10 +53,30 @@ public class StreamTest {
         });
     }
 
+    /**
+     * lambda遍历set
+     */
+    public static void set(){
+       Set<String> set = new HashSet<>();
+       set.add("aaa");
+       set.add("bbb");
+       set.add("ccc");
+       set.forEach((v)->{
+           System.out.println(v);
+       });
+    }
+
     public static void main(String[] args) {
         //intStreamTest();
         //longStreamTest();
-        arry();
-        map();
+        //set();
+        //1 数组/列表中的每个元素都做相同操作
+        int[] ia = Arrays.stream(range(1, 10)).map(i->i*2).toArray();
+        //计算集合 / 数组中的数字之和
+        Integer reduce = Stream.iterate(0, i -> i + 1).limit(3).reduce(0, Integer::sum);
+        System.out.println(reduce);
+        BinaryOperator<Long> add = (x,y)->x+y;
+        Long apply = add.apply(1L, 2L);
+        System.out.println(apply);
     }
 }
