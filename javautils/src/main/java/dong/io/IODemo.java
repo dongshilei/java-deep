@@ -81,11 +81,26 @@ public class IODemo {
         System.out.println(sbuffer.toString());
     }
 
+    /**
+     * 字节流转字符流
+     * @throws IOException
+     */
+    public static void testOutputStreamWriter() throws IOException {
+        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("D:\\abc.txt"),"UTF-8");
+        for (int i=0;i<5;i++){
+            writer.write("测试"+i+"\r\n");
+        }
+        writer.flush();
+        writer.close();
+    }
+
+
     public static void main(String[] args) throws IOException {
         //testOutputStream();
         //testInputStream();
 //        testWriter();
 //        testReader();
-        testInputStreamRead();
+//        testInputStreamRead();
+        testOutputStreamWriter();
     }
 }
