@@ -1,12 +1,11 @@
 package dong.jodaTime;
 
+import com.alibaba.fastjson.JSON;
 import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 import static java.util.Locale.CHINESE;
 
@@ -36,6 +35,9 @@ public class JodaTimeTest {
         DateTimeFormatter format = DateTimeFormat.forPattern("yyyy年MM月");
         DateTime parse = DateTime.parse("2017年09月",format);
         System.out.println(parse.monthOfYear().get());
+        //格式化，日期转字符串  yyyy-MM-dd
+        String s = dt.toString("yyyy-MM-dd");
+        System.out.println(s);
     }
 
     /**
@@ -71,7 +73,6 @@ public class JodaTimeTest {
 
         // 当前时间的10小时之前的时间
         System.out.println(DateTime.now().minusHours(10).toString(FORMATE_DATE));
-
         //取前几秒的时间
         System.out.println( dt.secondOfMinute().addToCopy(-3));
 
@@ -205,7 +206,7 @@ public class JodaTimeTest {
     public static void main(String[] args) {
         //useCaseOne();
         //useCaseWith();
-        DateTime begin = new DateTime(1504172432622L);
+/*        DateTime begin = new DateTime(1504172432622L);
         DateTime end = begin.plusDays(31);
         int months = Months.monthsBetween(begin, end).getMonths();
         System.out.println(months);
@@ -215,7 +216,47 @@ public class JodaTimeTest {
         if(endMillis-end2Millis>0){
             months+=1;
         }
-        System.out.println(months);
+        System.out.println(months);*/
+
+        DateTime dateTime = new DateTime();
+        DateTime.Property property = dateTime.dayOfWeek();
+        int i = property.get();
+        System.out.println(i);
+        //字符串转日期格式
+        DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
+        DateTime parse = DateTime.parse("20170911",format);
+        System.out.println(parse.toString("yyyy年MM月dd日"));
+
+        DateTime dateTime1 = DateTime.now().minusHours(3);
+        System.out.println(dateTime1);
+
+        String dateT = DateTime.now().minusDays(1).toString("yyyy-MM-dd");
+        System.out.println(dateT);
+        String toString = DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
+        System.out.println(toString);
+
+        DateTime dt = DateTime.now().withTime(10, 0, 0, 0);
+        System.out.println(dt);
+        DateTime dt2 = DateTime.now().withHourOfDay(10);
+        System.out.println(dt2);
+
+        DateTime dd = new DateTime(2018, 1, 1, 0, 0, 0);
+        System.out.println(dd);
+
+        DateTime dt3 = DateTime.now().minusDays(1).withHourOfDay(20);
+        System.out.println(dt3.toString("yyyyMMddHH"));
+
+        String starStr = new DateTime(1548345634000L).toString("yyyyMMddHHmmss");
+        String endStr = new DateTime(1548345634880L).toString("yyyyMMddHHmmss");
+        System.out.println(starStr.equals(endStr));
+
+
+        List<String> list = Arrays.asList("userName","phoneNo");
+        System.out.println(JSON.toJSONString(list));
+       // String startTime = DateTime.now().minusDays(day).toString("yyyy-MM-dd");
+        //String endTime = DateTime.now().minusDays(day).plusDays(1).toString("yyyy-MM-dd");
+        System.out.println(DateTime.now().minusDays(1).toString("yyyy-MM-dd"));
+        System.out.println(DateTime.now().minusDays(1).plusDays(1).toString("yyyy-MM-dd"));
 
     }
 }

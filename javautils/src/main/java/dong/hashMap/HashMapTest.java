@@ -11,6 +11,10 @@ public class HashMapTest {
 
 
     public static void main(String[] args) {
+        test2();
+    }
+
+    private static void test1() {
         Country india = new Country("India",1000);
         Country japan = new Country("Japan",1000);
         Country france = new Country("France",2000);
@@ -36,5 +40,20 @@ public class HashMapTest {
         for (Object value : countryStringMap.values()){
             System.out.println(value.toString());
         }
+    }
+
+    private static void test2(){
+        Map<String,String> map = new HashMap<>();
+        for(int i=0;i<10000000;i++){
+            map.put(String.valueOf(i),String.valueOf(i));
+        }
+        System.out.println(map.size());
+        Iterator<String> iterator = map.keySet().iterator();
+        while (iterator.hasNext()){
+            iterator.next();
+            iterator.remove();
+        }
+        System.out.println(map.size());
+
     }
 }

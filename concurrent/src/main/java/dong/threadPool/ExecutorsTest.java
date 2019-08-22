@@ -28,7 +28,7 @@ public class ExecutorsTest {
                 }
             });
         }
-        threadPool.shutdown();
+        //threadPool.shutdown();
     }
 
     /**
@@ -80,8 +80,8 @@ public class ExecutorsTest {
          * 直到有空闲下来的线程执行任务，而当执行的任务小于池大小，空闲的线程也不会去销毁。
          */
 
-        //ExecutorService threadPool = Executors.newFixedThreadPool(3);
-        //test(threadPool);
+        ExecutorService threadPool = Executors.newFixedThreadPool(3);
+        test(threadPool);
         /**
          *  测试CachedThreadPool 结果如下
          *
@@ -136,7 +136,7 @@ public class ExecutorsTest {
         //test(threadPool);
 
 
-        testScheduledPool();
+        //testScheduledPool();
     }
 
 }

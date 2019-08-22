@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import static com.xiaoleilu.hutool.util.ArrayUtil.range;
 import static java.io.FileDescriptor.out;
 import static jdk.nashorn.internal.objects.Global.println;
+import static jdk.nashorn.internal.runtime.ScriptObject.setGlobalObjectProto;
 
 /**
  * Created by DONGSHILEI on 2017/9/19
@@ -71,6 +72,7 @@ public class StreamTest {
         //longStreamTest();
         //set();
         //1 数组/列表中的每个元素都做相同操作
+/*
         int[] ia = Arrays.stream(range(1, 10)).map(i->i*2).toArray();
         //计算集合 / 数组中的数字之和
         Integer reduce = Stream.iterate(0, i -> i + 1).limit(3).reduce(0, Integer::sum);
@@ -78,5 +80,11 @@ public class StreamTest {
         BinaryOperator<Long> add = (x,y)->x+y;
         Long apply = add.apply(1L, 2L);
         System.out.println(apply);
+*/
+
+        IntStream.range(0,10).forEach(i-> System.out.println(i));
+
+        Long lon = 155L;
+        System.out.println(lon==155);
     }
 }

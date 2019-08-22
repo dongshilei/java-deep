@@ -17,6 +17,7 @@
         <module>design-pattern</module>
         <module>tcp</module>
         <module>google-guice</module>
+        <module>akka</module>
     </modules>
     <name>java-deep</name>
     <url>http://maven.apache.org</url>
