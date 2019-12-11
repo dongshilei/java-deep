@@ -1,16 +1,8 @@
 package dong.java8;
 
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.function.BinaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
-import java.util.stream.Stream;
-
-import static com.xiaoleilu.hutool.util.ArrayUtil.range;
-import static java.io.FileDescriptor.out;
-import static jdk.nashorn.internal.objects.Global.println;
-import static jdk.nashorn.internal.runtime.ScriptObject.setGlobalObjectProto;
 
 /**
  * Created by DONGSHILEI on 2017/9/19
