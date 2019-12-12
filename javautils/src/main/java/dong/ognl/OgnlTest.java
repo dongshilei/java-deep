@@ -7,10 +7,7 @@ import ognl.OgnlException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Ognl学习
@@ -199,6 +196,11 @@ public class OgnlTest {
         list.add(wangwu);
         context.put("list",list);
         try {
+            //获取list中第一个元素的name
+            Object exp = Ognl.parseExpression("#list.get(0).getName()");
+            Object value = Ognl.getValue(exp, context, context.getRoot());
+            System.out.println(value); //zhangsan
+
             //获取list中name长度大于4的元素的个数
             Object exp1 = Ognl.parseExpression("#list.{? #this.name.length()>4}.size()");
             Object value1 = Ognl.getValue(exp1, context, context.getRoot());
@@ -245,5 +247,65 @@ public class OgnlTest {
         } catch (OgnlException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     *  将json数据通过json模版映射成新的json
+     */
+    @Test
+    public void test8(){
+        JSONObject srs = JSONObject.parseObject("{\"name\":\"zhangsan\",\"age\":12.00}");
+        JSONObject tmp = JSONObject.parseObject("{\"tar_name\":\"#name\",\"tar_age\":\"@@round(#age*1000)\"}");
+        JSONObject target = new JSONObject();
+        OgnlContext context = new OgnlContext();
+        Set<Map.Entry<String, Object>> entries = tmp.entrySet();
+        Iterator<Map.Entry<String, Object>> iterator = entries.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, Object> next = iterator.next();
+            String key = next.getKey();
+            Object value = next.getValue();
+            if (value.toString().contains("#")){
+                try {
+                    String replace = value.toString().replace("#", "");
+                    Object src_value = Ognl.getValue(replace, context,srs);
+                    System.out.println(src_value);
+                    target.put(key,src_value);
+                } catch (OgnlException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println(target.toJSONString());
+    }
+
+    /**
+     *  将json数据通过json模版映射成新的json
+     */
+    @Test
+    public void test9(){
+        JSONObject srs = JSONObject.parseObject("{\"name\":\"zhangsan\",\"age\":12.00}");
+        JSONObject tmp = JSONObject.parseObject("{\"tar_name\":\"#body.name\",\"tar_age\":\"@@round(#body.age*1000)\",\"sex\":\"F\"}");
+        JSONObject target = new JSONObject();
+        OgnlContext context = new OgnlContext();
+        context.put("body",srs);
+        Set<Map.Entry<String, Object>> entries = tmp.entrySet();
+        Iterator<Map.Entry<String, Object>> iterator = entries.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, Object> next = iterator.next();
+            String key = next.getKey();
+            Object value = next.getValue();
+            if (value.toString().contains("#")){
+                try {
+                    Object expression = Ognl.parseExpression(value.toString());
+                    Object src_value = Ognl.getValue(expression, context,context.getRoot());
+                    target.put(key,src_value);
+                } catch (OgnlException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                target.put(key,value);
+            }
+        }
+        System.out.println(target.toJSONString());
     }
 }
