@@ -17,6 +17,7 @@
         <module>design-pattern</module>
         <module>tcp</module>
         <module>akka</module>
+        <module>camel</module>
     </modules>
     <name>java-deep</name>
     <url>http://maven.apache.org</url>
