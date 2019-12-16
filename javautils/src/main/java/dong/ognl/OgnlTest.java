@@ -143,6 +143,15 @@ public class OgnlTest {
         } catch (OgnlException e) {
             e.printStackTrace();
         }
+
+        Dog[] dogs = new Dog[]{dog,dog2};
+        try {
+            context.put("dogs",dogs);
+            Object value = Ognl.getValue("#dogs[0].name", context, context.getRoot());
+            System.out.println(value);
+        } catch (OgnlException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

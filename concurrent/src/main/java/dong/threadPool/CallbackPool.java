@@ -12,6 +12,7 @@ public class CallbackPool {
         ExecutorService threadPool = Executors.newFixedThreadPool(3);
         CallDemo hello = new CallDemo("hello");
         Future<String> submit = threadPool.submit(hello);
+        System.out.println("我打印了");
         try {
             System.out.println(submit.get());
         } catch (InterruptedException e) {
@@ -19,6 +20,7 @@ public class CallbackPool {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        System.exit(1);
     }
 
     static class CallDemo implements Callable<String>{
@@ -31,6 +33,7 @@ public class CallbackPool {
 
         @Override
         public String call() throws Exception {
+            Thread.sleep(5000);
             return name+"  world";
         }
     }
