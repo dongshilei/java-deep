@@ -10,6 +10,8 @@ public class MyRouteBuilder extends RouteBuilder {
     /**
      * Let's configure the Camel routing rules using Java code...
      */
+
+    @Override
     public void configure() {
 
         // here is a sample which processes the input files
