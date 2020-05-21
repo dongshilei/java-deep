@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author DONGSHILEI
@@ -86,6 +87,16 @@ public class IdGeneratorTest {
         for (int i = 0 ; i < 20 ; i ++) {
             System.out.println(snowflake.nextId());
         }
-
+    }
+    @Test
+    public void test(){
+        AtomicInteger atomicInteger = new AtomicInteger(10000000);
+        for (int ii = 0 ; ii< 100; ii++) {
+            int i = atomicInteger.incrementAndGet();
+            if (i>10000003) {
+                atomicInteger = new AtomicInteger(10000000);
+            }
+            System.out.println(i);
+        }
     }
 }

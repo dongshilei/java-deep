@@ -18,6 +18,8 @@
         <module>tcp</module>
         <module>akka</module>
         <module>camel</module>
+        <module>security</module>
+        <module>jvm</module>
     </modules>
     <name>java-deep</name>
     <url>http://maven.apache.org</url>

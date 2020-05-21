@@ -172,7 +172,7 @@ public class OgnlTest {
         jsonObject.put("c","cc");
         context.put("jsonObject",jsonObject);
         try {
-            Object mapValue = Ognl.getValue("#map.a", context,context.getRoot());
+            Object mapValue = Ognl.getValue("#map.a1", context,context.getRoot());
             Object jsonValue = Ognl.getValue("#jsonObject.a", context,context.getRoot());
             System.out.println(mapValue);//aa
             System.out.println(jsonValue);//aa
