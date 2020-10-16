@@ -21,12 +21,12 @@ public class IdGenerator {
     Logger log = LoggerFactory.getLogger(IdGenerator.class);
     // workerId 取值应在 [0,31]之间，否则Snowflake 报异常
     private long workerId = 0;
-
+    public static final Long ipv4ToLong = NetUtil.ipv4ToLong(cn.hutool.core.util.NetUtil.getLocalhostStr());
     @PostConstruct
     void init() {
         try {
             workerId = NetUtil.ipv4ToLong(NetUtil.getLocalhostStr());
-            log.info("当前机器 workerId: {}", workerId);
+            System.out.println("当前机器 workerId: "+ workerId);
         } catch (Exception e) {
             log.warn("获取机器 ID 失败", e);
             workerId = NetUtil.getLocalhost().hashCode();
@@ -46,6 +46,11 @@ public class IdGenerator {
     public synchronized String batchId(int tenantId, int module) {
         String prefix = DateTime.now().toString(DatePattern.PURE_DATETIME_MS_PATTERN);
         return prefix + tenantId + module + RandomUtil.randomNumbers(3);
+    }
+
+    public synchronized String batchId(long ipv4ToLong) {
+        String prefix = DateTime.now().toString(DatePattern.PURE_DATETIME_MS_PATTERN);
+        return prefix + ipv4ToLong + RandomUtil.randomNumbers(3);
     }
 
     /**

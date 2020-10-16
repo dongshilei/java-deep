@@ -19,22 +19,29 @@ public class ReadWriteLockDemo {
     public double getPrice1(){
         // 读取资源锁定
         lock.readLock().lock();
-        double value = price1;
-        lock.readLock().unlock();
-        return value;
+        try {
+            return price1;
+        } finally {
+            lock.readLock().unlock();
+        }
     }
     public double getPrice2(){
         // 读取资源锁定
         lock.readLock().lock();
-        double value = price2;
-        lock.readLock().unlock();
-        return value;
+        try {
+            return price2;
+        } finally {
+            lock.readLock().unlock();
+        }
     }
     public void setPrice(double price1,double price2){
         lock.writeLock().lock();
-        this.price1 = price1;
-        this.price2 = price2;
-        lock.writeLock().unlock();
+        try {
+            this.price1 = price1;
+            this.price2 = price2;
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     static class Reader implements Runnable{

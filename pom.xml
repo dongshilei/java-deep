@@ -20,6 +20,7 @@
         <module>camel</module>
         <module>security</module>
         <module>jvm</module>
+        <module>disruptor</module>
     </modules>
     <name>java-deep</name>
     <url>http://maven.apache.org</url>

@@ -263,7 +263,7 @@ public class OgnlTest {
      */
     @Test
     public void test8(){
-        JSONObject srs = JSONObject.parseObject("{\"name\":\"zhangsan\",\"age\":12.00}");
+        JSONObject srs = JSONObject.parseObject("{\"name\":\"zhangsan\",\"age\":12}");
         JSONObject tmp = JSONObject.parseObject("{\"tar_name\":\"#name\",\"tar_age\":\"@@round(#age*1000)\"}");
         JSONObject target = new JSONObject();
         OgnlContext context = new OgnlContext();
@@ -292,8 +292,8 @@ public class OgnlTest {
      */
     @Test
     public void test9(){
-        JSONObject srs = JSONObject.parseObject("{\"name\":\"zhangsan\",\"age\":12.00}");
-        JSONObject tmp = JSONObject.parseObject("{\"tar_name\":\"#body.name\",\"tar_age\":\"@@round(#body.age*1000)\",\"sex\":\"F\"}");
+        JSONObject srs = JSONObject.parseObject("{\"name\":\"zhangsan\",\"age\":12}");
+        JSONObject tmp = JSONObject.parseObject("{\"tar_name\":\"#body.name\",\"tar_age\":\"@@round(#body.age+1)\",\"sex\":\"F\"}");
         JSONObject target = new JSONObject();
         OgnlContext context = new OgnlContext();
         context.put("body",srs);
@@ -316,5 +316,11 @@ public class OgnlTest {
             }
         }
         System.out.println(target.toJSONString());
+    }
+
+    @Test
+    public void test10(){
+        String dogName  = Optional.ofNullable(person).map(p -> p.getDog()).map(d -> d.getName()).orElse("空了");
+        System.out.println(dogName);
     }
 }
